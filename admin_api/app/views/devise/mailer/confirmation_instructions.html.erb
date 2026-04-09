@@ -1,0 +1,37 @@
+
+<br>
+
+<tr>
+    <td style="padding: 0px 20px;">
+        Welcome/欢迎 <%= @email %>,
+    </td>
+</tr>
+<tr>
+    <td valign="middle" style="line-height:24px;padding: 15px 20px;">
+      <p>
+        请点击以下按钮激活账户:<br>
+        You can confirm your account email through the button below:
+      </p>
+    </td>
+</tr>
+<tr>
+    <td class="content">
+        <p style="margin: 8px 0;"><%= link_to '激活账户', confirmation_url(@resource, confirmation_token: @token) , class: "mb-1 btn btn-success"%>
+        </p>
+    </td>
+</tr>
+
+<tr>
+  <td class="content">
+    <p>
+
+      或复制以下地址到浏览器上访问 <br>
+      Or copy the following address to the browser.
+    </p>
+    <span class="text-info">
+      <%= confirmation_url(@resource, confirmation_token: @token) %>
+    </span>
+  </td>
+</tr>
+
+<br>

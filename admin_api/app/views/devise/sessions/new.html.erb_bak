@@ -1,0 +1,101 @@
+<div class="flex-fill d-flex flex-column justify-content-center py-4">
+  <div class="container-tight py-6">
+    <div class="text-center mb-4">
+      <a href="."><img src="<%= Setting.logo  %>" height="56" alt=""></a>
+    </div>
+    <form class="card card-md" id="new_user1" action="/login" accept-charset="UTF-8" method="post">
+      <%= form_token %>
+      <div class="card-body">
+
+        <h2 class="card-title text-center mb-4">Login in/登录</h2>
+
+        <%= notices_message %>
+        <div class="mb-3">
+          <label class="form-label">Email address</label>
+          <input data-parsley-type="email" class="form-control" name="user[email]" autocomplete="on"  aria-describedby="emailHelp"   id="email"  placeholder="Enter email"required/>
+        </div>
+        <div class="mb-2">
+          <label class="form-label">
+            Password
+            <span class="form-label-description">
+              <a href="<%= new_password_path(resource_name) %>" id="forget-password" class="float-right small">Forgot Password?</a>
+            </span>
+          </label>
+          <input type="password" class="form-control" name="user[password]" id="password" autocomplete="off" placeholder="Password" data-parsley-trigger="change"  minlength="6"  required/>
+
+        </div>
+        <div class="mb-2">
+          <label class="form-check">
+            <input type="checkbox" id="checkbox" name="user[remember_me]"  class="form-check-input"/>
+            <span class="form-check-label">Remember me on this device</span>
+          </label>
+        </div>
+        <div class="form-footer">
+          <button type="submit" class="btn btn-primary w-100">Sign in</button>
+        </div>
+      </div>
+      <div class="hr-text">or</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col"><a href="/wework/login" class="btn btn-white w-100">
+              <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="48px" viewBox="0 0 48 48" enable-background="new 0 0 48 48" xml:space="preserve">  <image id="image0" width="48" height="48" x="0" y="0"
+                    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+                    AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAC91BMVEX///8Aif8Ag/AAhPAA
+                    g/AAg/AAgvAAg/AAgu8Ag+8Ag+8Ag/AAg/AAhPAAqv8AhvIAg+8Agu8Agu8AiPcAg+8Ag+8AgvAA
+                    g/AAifYAhfQAg+8Agu8Ag+8Ah/EAg/AAgvAAg/AAgu8AiP8AhfEAg+8AgvAAg/EAhPEAhvIAmf8A
+                    //8Aj+8AhPEAg/EAg+8Ag+8Ag+8AifUAhO8Ag/AAhe8A//8Ai/8Ag+8Ag+8AgvMAgu8Av/8Ag/AA
+                    qv8Ag/AAg/AAgvAAg+8AgvEAhvMAg/AAhfAAhPYAg+8Ag/AAjPIAgu8Ag+8AgvAAg/AAjv8AhvIA
+                    g/EAhPAAg+8AhPEAgvAAhPYAg/AAgu8AgvAAg+8Ag/AAgu8Ag/AAgu8AhvIAhPEAgvAAg/AAg/AA
+                    gvAAgu81vgAsvwA3vAAAg/AuvAAtvQAsvAAvvQAAg/AuvwAtvAAzuwAAhO8tvQAvvQAAgvAAhfUt
+                    vgAuvAAAgvAtuwAtvQAz/wD/zQAvxgAtvQAtuwD//wD/zgD/zgAxvgAuvQAwwgD/0gD/zAD/zAAu
+                    vgAtvAAtvAAAgvAAg+8Ah+//3QD/ywD/zgD/zQD/zQD/4QAswQAuvQArxAAAgvQAhv8AgvAAg/D/
+                    zwD/zAD/zQAAh/UAgu8Ag+8AjvEAgvAAhPEAmf8Ah/H/0AD/zAAAgu8Ag/AAhfQAg+8AgvAAhPAA
+                    gvD/zgD/zAAAj/AAg+8Ag/AAg/AAg/D/zQD/zQAAg/IAge8AhPD/1wD/zAAAgPP/zQD/zAD/zAD/
+                    ygD8ZQD7ZQD/VQAAgu4AgvAAgfH+ZQD8ZgD/ZQAAh/8Ag/AAg+4Ag/EAkfcAhPIAg/AAg/IAg/AA
+                    g/AAgvEAg+8Ag/EAn//9ZwD8ZQD7ZgD/aQAAg/EAgvAAov8AgvD/ZAD7ZQD7ZQD9ZgAAg/EAge/9
+                    ZgD7ZQAAg/AAg/D9ZAD8ZgD/mQD8ZQD8ZQD7ZgD7ZwD/aAD8ZQD8ZAD+ZQD/YgAAgu8tvAD/zAD7
+                    ZQD///8cCjzQAAAA+HRSTlMADUZ6rdrr+vXm0J5pNAM9oOOBHkDT/aocF6TzcTXq+/7AD0n03Y5b
+                    KAoCEDZrovLSGlGrQQELYeAr1QTHBqcj25SNFcsyHfalFOHBidgJOUqbkDjKG/zli7FUYM3xJnzp
+                    prWZxCtjF9az/v13qFj7D3CvePkZlNLI+fwFMxvGqQHAL27fSyLq1JX+94fkIA9x2v74EVLqHi8V
+                    uISK/Fsx8sUS724FJEb13uguw2Z2l6u4Itzsz5ydTZrRdCDlUuX30x3yxwNa7Fu47CYR+PelHjwh
+                    TnWGj4B9COz8xk7W0gtkM/73f+6e13RCe3XfBf7jzZAb4f66DcVlG9QAAAABYktHRACIBR1IAAAA
+                    B3RJTUUH5gQEAB4IrLHURQAAAs5JREFUSMdjYKAvYGRiZmFlY+fg5OLm4eUjqJxfgOMHEhAUEsar
+                    XET0BzoQE5fAqVxS6gc2IC2Dw2Gyckiq5BWQOIpK2NQrq0ClVdXUNTQZtLR1dPX0oUIGhpjqjeQh
+                    csYmpghBM3MDiKgFhg5LabCElQiauLUMxBYbW1RxM1awsJ0tptX2DmApR1RRIbCgkykDFuDsApJT
+                    cEUWc3MHiXngCG5PL5CsN7KQD0jE1w9XBMmKgeT9kUQsQAIBOGOUIRAkH4TgB4P4IbjVM4SGARWE
+                    a8H5ESANMng0MESiugnMlcCnIQqkIhrOjQHyYvGpZ4gDaYiHcxNAcYxXg21igFFSMpzLDtSQwkAQ
+                    IBxN2AYGhtS0dAQnA6jB3Rqv+sysn9k5cF4uyEs6+NTnZf38+TO/AMYtBGngxqeh6CcIFMO4GiAN
+                    JaV4NJSBNZTD+RUgHT54NBRUgjRUVcP45iAN7Lh9UcNQW5cP1FEPE+DLwJ5xIaCh8VcTkGxu+ZnV
+                    ChNTBuc4B6zpqa39VweE1dnVDQ+oHrCO3j501f0TJk76NXkKlDd12vQZMyFMrVlgHbPR1M+Z+wsI
+                    5sH58xf8UFgIYS5aDNKwhIFh6TJYyWhqu3wSSP0KhAErQYrUIOxVIPZqPpnFPzjWqBWar123PkZz
+                    A0j9r41w9ZvABehmCAdUUm7x34pUpG5j2A7WsAOuYSdYfBfEfhDTHbkI/rGbYQ/IC3sRLgK7QmEf
+                    mG2GWc7bMTAs33/g4KHDR45C1B8Dmqdw/ASEI4mpQR5aEJ78feo0iD5z9se58xdgtvXBlMVcvHT5
+                    ylXHa9cLb9yExvSt37fv3GVguPfj/gOE8/hiwcoTHiJKHzh49Pj3799Pnj57jiKqC0p/TljrGoYX
+                    v0HgJZroK7XXbthTH8MbsIa3DESDd+9BGj4Qr4HhI0jDJxI0fP7y/us3EtQDwfejpKmnDAAA19ch
+                    1TzMql4AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjItMDQtMDNUMTY6MzA6MDgrMDg6MDCwPyhAAAAA
+                    JXRFWHRkYXRlOm1vZGlmeQAyMDIyLTA0LTAzVDE2OjMwOjA4KzA4OjAwwWKQ/AAAACB0RVh0c29m
+                    dHdhcmUAaHR0cHM6Ly9pbWFnZW1hZ2ljay5vcme8zx2dAAAAGHRFWHRUaHVtYjo6RG9jdW1lbnQ6
+                    OlBhZ2VzADGn/7svAAAAF3RFWHRUaHVtYjo6SW1hZ2U6OkhlaWdodAA0OIdghy0AAAAWdEVYdFRo
+                    dW1iOjpJbWFnZTo6V2lkdGgANDh/z0egAAAAGXRFWHRUaHVtYjo6TWltZXR5cGUAaW1hZ2UvcG5n
+                    P7JWTgAAABd0RVh0VGh1bWI6Ok1UaW1lADE2NDg5NzQ2MDilsdHxAAAAEnRFWHRUaHVtYjo6U2l6
+                    ZQAxODIzQkJJFfReAAAARnRFWHRUaHVtYjo6VVJJAGZpbGU6Ly8vYXBwL3RtcC9pbWFnZWxjL2lt
+                    Z3ZpZXcyXzlfMTY0Nzg0ODMzNDM3MzU4NTJfMjVfWzBdEP5PLgAAAABJRU5ErkJggg==" ></image>
+                </svg>
+
+              企业微信
+            </a></div>
+        </div>
+      </div>
+    </form>
+
+
+    <div class="text-center text-muted mt">
+      Don't have account yet? 
+      <a href="<%= new_registration_path(resource_name) %>" id="register-btn" class="uppercase">Create an account</a>
+    </div>
+  </div>
+</div>
+
+<%= render "layouts/footer"%>

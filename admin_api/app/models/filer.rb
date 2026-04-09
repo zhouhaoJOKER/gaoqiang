@@ -1,0 +1,3 @@
+class Filer < Node
+
+end

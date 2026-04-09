@@ -1,0 +1,29 @@
+Description:
+    Creates an API controller for a model in the Api::V1 namespace, following the project's conventions.
+    When the model is namespaced (e.g. Crm::Client), the controller is placed under api/v1/<module>/
+    and all model constants use the root prefix (::Crm::Client) to avoid constant lookup issues.
+
+Examples:
+    # 无命名空间，生成 app/controllers/api/v1/clients_controller.rb
+    rails g api:v1:scaffold_controller Client
+
+    # 有命名空间，生成 app/controllers/api/v1/crm/clients_controller.rb，并自动创建 crm 目录
+    rails g api:v1:scaffold_controller Crm::Client
+
+    # 带属性
+    rails g api:v1:scaffold_controller Crm::Client --attributes=code,name,parent_id,status
+
+Options:
+    --attributes=code,name,...   Comma-separated list of permitted attributes
+    --skip-template-engine       Skip generating view templates
+    --skip-assets                Skip generating assets
+    --skip-helper                Skip generating helper
+    --skip-resources             Skip generating resource
+    --skip-routes                Skip generating routes
+    --skip-test                  Skip generating test files
+
+Note:
+    - Controllers inherit from Api::V1::BaseController (or BaseController when namespaced).
+    - For namespaced models (e.g. Crm::Client), the generator creates the module directory
+      under app/controllers/api/v1/ if it does not exist and uses ::Module::Model in
+      the generated code so that constant resolution works correctly under Api::V1.

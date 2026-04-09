@@ -1,0 +1,2 @@
+class AuditList < ApplicationRecord
+end

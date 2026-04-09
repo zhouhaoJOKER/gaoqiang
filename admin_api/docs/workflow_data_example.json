@@ -1,0 +1,166 @@
+{
+  "description": "合同流程数据示例，可直接用于数据库 seed、API  mock 或前端导入",
+  "version": "1.0",
+
+  "nodes": [
+    { "id": "order", "key": "order", "label": "订单", "position_x": 140, "position_y": 0 },
+    { "id": "cancel", "key": "cancel", "label": "取消订单", "position_x": 380, "position_y": 0 },
+    { "id": "formula", "key": "formula", "label": "配方确认", "position_x": 140, "position_y": 70 },
+    { "id": "rd", "key": "rd", "label": "研发试验", "position_x": 20, "position_y": 150 },
+    { "id": "test_rd", "key": "test_rd", "label": "检测", "position_x": 20, "position_y": 230 },
+    { "id": "purchase", "key": "purchase", "label": "采购", "position_x": 260, "position_y": 150 },
+    { "id": "pack_m", "key": "pack_m", "label": "包材、硬头、标签", "position_x": 80, "position_y": 230 },
+    { "id": "raw_m", "key": "raw_m", "label": "原药、助剂", "position_x": 280, "position_y": 230 },
+    { "id": "warehouse", "key": "warehouse", "label": "仓库收货", "position_x": 180, "position_y": 310 },
+    { "id": "inspect", "key": "inspect", "label": "验收", "position_x": 180, "position_y": 390 },
+    { "id": "return_s", "key": "return_s", "label": "退回供应商", "position_x": 0, "position_y": 470 },
+    { "id": "downgrade", "key": "downgrade", "label": "降级使用", "position_x": 120, "position_y": 470 },
+    { "id": "plan", "key": "plan", "label": "生产计划", "position_x": 300, "position_y": 470 },
+    { "id": "schedule", "key": "schedule", "label": "排单", "position_x": 180, "position_y": 550 },
+    { "id": "formulate", "key": "formulate", "label": "配制", "position_x": 180, "position_y": 630 },
+    { "id": "test_qc", "key": "test_qc", "label": "检测", "position_x": 180, "position_y": 710 },
+    { "id": "pack_setup", "key": "pack_setup", "label": "包装调机", "position_x": 180, "position_y": 790 },
+    { "id": "first_bottle", "key": "first_bottle", "label": "首瓶确认", "position_x": 180, "position_y": 870 },
+    { "id": "packing", "key": "packing", "label": "包装", "position_x": 180, "position_y": 950 },
+    { "id": "sampling", "key": "sampling", "label": "抽检", "position_x": 180, "position_y": 1030 },
+    { "id": "biz_confirm", "key": "biz_confirm", "label": "业务确认", "position_x": 180, "position_y": 1110 },
+    { "id": "concession", "key": "concession", "label": "让步接收", "position_x": 180, "position_y": 1190 },
+    { "id": "ship", "key": "ship", "label": "发货", "position_x": 180, "position_y": 1270 }
+  ],
+
+  "edges": [
+    { "id": "e-order-formula", "source": "order", "target": "formula" },
+    { "id": "e-order-cancel", "source": "order", "target": "cancel" },
+    { "id": "e-formula-rd", "source": "formula", "target": "rd", "label": "无现成配方" },
+    { "id": "e-formula-purchase", "source": "formula", "target": "purchase", "label": "配方成熟" },
+    { "id": "e-rd-test_rd", "source": "rd", "target": "test_rd" },
+    { "id": "e-test_rd-rd", "source": "test_rd", "target": "rd", "label": "不通过" },
+    { "id": "e-test_rd-formula", "source": "test_rd", "target": "formula", "label": "配方不成功" },
+    { "id": "e-purchase-pack_m", "source": "purchase", "target": "pack_m" },
+    { "id": "e-purchase-raw_m", "source": "purchase", "target": "raw_m" },
+    { "id": "e-pack_m-warehouse", "source": "pack_m", "target": "warehouse" },
+    { "id": "e-raw_m-warehouse", "source": "raw_m", "target": "warehouse" },
+    { "id": "e-warehouse-inspect", "source": "warehouse", "target": "inspect" },
+    { "id": "e-inspect-return_s", "source": "inspect", "target": "return_s", "label": "不合格" },
+    { "id": "e-inspect-downgrade", "source": "inspect", "target": "downgrade", "label": "降级使用" },
+    { "id": "e-inspect-plan", "source": "inspect", "target": "plan", "label": "合格" },
+    { "id": "e-plan-schedule", "source": "plan", "target": "schedule" },
+    { "id": "e-concession-plan", "source": "concession", "target": "plan", "label": "反馈" },
+    { "id": "e-schedule-formulate", "source": "schedule", "target": "formulate" },
+    { "id": "e-formulate-test_qc", "source": "formulate", "target": "test_qc" },
+    { "id": "e-test_qc-formulate", "source": "test_qc", "target": "formulate", "label": "不合格" },
+    { "id": "e-test_qc-pack_setup", "source": "test_qc", "target": "pack_setup", "label": "合格" },
+    { "id": "e-pack_setup-first_bottle", "source": "pack_setup", "target": "first_bottle" },
+    { "id": "e-first_bottle-pack_setup", "source": "first_bottle", "target": "pack_setup", "label": "不通过" },
+    { "id": "e-first_bottle-packing", "source": "first_bottle", "target": "packing", "label": "通过" },
+    { "id": "e-first_bottle-formulate", "source": "first_bottle", "target": "formulate", "label": "返工" },
+    { "id": "e-packing-sampling", "source": "packing", "target": "sampling" },
+    { "id": "e-sampling-biz_confirm", "source": "sampling", "target": "biz_confirm", "label": "不合格" },
+    { "id": "e-sampling-ship", "source": "sampling", "target": "ship", "label": "合格" },
+    { "id": "e-biz_confirm-concession", "source": "biz_confirm", "target": "concession" },
+    { "id": "e-biz_confirm-ship", "source": "biz_confirm", "target": "ship" },
+    { "id": "e-concession-ship", "source": "concession", "target": "ship" }
+  ],
+
+  "main_step_keys": [
+    "order", "formula", "purchase", "warehouse", "inspect",
+    "plan", "schedule", "formulate", "test_qc", "pack_setup",
+    "first_bottle", "packing", "sampling", "ship"
+  ],
+
+  "workflow_logs_example": [
+    {
+      "contract_id": 1,
+      "step_key": "order",
+      "step_label": "订单",
+      "operated_at": "2025-03-06 10:00:00",
+      "operator_id": 1,
+      "operator_name": "张三",
+      "action": "创建合同，合同编号 HT20250306001",
+      "result": null,
+      "result_extra": null,
+      "sort": 0
+    },
+    {
+      "contract_id": 1,
+      "step_key": "formula",
+      "step_label": "配方确认",
+      "operated_at": "2025-03-07 09:30:00",
+      "operator_id": 2,
+      "operator_name": "李四",
+      "action": "现成配方，走采购流程",
+      "result": "existing",
+      "result_extra": null,
+      "sort": 1
+    },
+    {
+      "contract_id": 1,
+      "step_key": "purchase",
+      "step_label": "采购",
+      "operated_at": "2025-03-08 14:00:00",
+      "operator_id": 3,
+      "operator_name": "王五",
+      "action": "采购单已下达，预计 3 月 12 日到货",
+      "result": null,
+      "result_extra": null,
+      "sort": 2
+    },
+    {
+      "contract_id": 1,
+      "step_key": "warehouse",
+      "step_label": "仓库收货",
+      "operated_at": "2025-03-12 11:20:00",
+      "operator_id": 4,
+      "operator_name": "赵六",
+      "action": "包材、原药已入库，质检待验",
+      "result": null,
+      "result_extra": null,
+      "sort": 3
+    },
+    {
+      "contract_id": 1,
+      "step_key": "inspect",
+      "step_label": "验收",
+      "operated_at": "2025-03-12 15:00:00",
+      "operator_id": 4,
+      "operator_name": "赵六",
+      "action": "待验收（当前节点）",
+      "result": null,
+      "result_extra": null,
+      "sort": 4
+    }
+  ],
+
+  "workflow_states_example": [
+    { "contract_id": 1, "step_key": "order", "status": "completed", "completed_at": "2025-03-06 10:00:00", "result": null },
+    { "contract_id": 1, "step_key": "formula", "status": "completed", "completed_at": "2025-03-07 09:30:00", "result": "existing" },
+    { "contract_id": 1, "step_key": "purchase", "status": "completed", "completed_at": "2025-03-08 14:00:00", "result": null },
+    { "contract_id": 1, "step_key": "warehouse", "status": "completed", "completed_at": "2025-03-12 11:20:00", "result": null },
+    { "contract_id": 1, "step_key": "inspect", "status": "current", "completed_at": null, "result": null },
+    { "contract_id": 1, "step_key": "plan", "status": "pending", "completed_at": null, "result": null },
+    { "contract_id": 1, "step_key": "schedule", "status": "pending", "completed_at": null, "result": null },
+    { "contract_id": 1, "step_key": "formulate", "status": "pending", "completed_at": null, "result": null },
+    { "contract_id": 1, "step_key": "test_qc", "status": "pending", "completed_at": null, "result": null },
+    { "contract_id": 1, "step_key": "pack_setup", "status": "pending", "completed_at": null, "result": null },
+    { "contract_id": 1, "step_key": "first_bottle", "status": "pending", "completed_at": null, "result": null },
+    { "contract_id": 1, "step_key": "packing", "status": "pending", "completed_at": null, "result": null },
+    { "contract_id": 1, "step_key": "sampling", "status": "pending", "completed_at": null, "result": null },
+    { "contract_id": 1, "step_key": "ship", "status": "pending", "completed_at": null, "result": null }
+  ],
+
+  "vue_flow_nodes_format": [
+    { "id": "order", "type": "workflow", "position": { "x": 140, "y": 0 }, "data": { "key": "order", "label": "订单", "status": "completed" } },
+    { "id": "formula", "type": "workflow", "position": { "x": 140, "y": 70 }, "data": { "key": "formula", "label": "配方确认", "status": "completed" } },
+    { "id": "purchase", "type": "workflow", "position": { "x": 260, "y": 150 }, "data": { "key": "purchase", "label": "采购", "status": "completed" } },
+    { "id": "warehouse", "type": "workflow", "position": { "x": 180, "y": 310 }, "data": { "key": "warehouse", "label": "仓库收货", "status": "completed" } },
+    { "id": "inspect", "type": "workflow", "position": { "x": 180, "y": 390 }, "data": { "key": "inspect", "label": "验收", "status": "current" } }
+  ],
+
+  "vue_flow_edges_format": [
+    { "id": "e-order-formula", "source": "order", "target": "formula" },
+    { "id": "e-formula-purchase", "source": "formula", "target": "purchase", "data": { "label": "配方成熟" } },
+    { "id": "e-purchase-pack_m", "source": "purchase", "target": "pack_m" },
+    { "id": "e-pack_m-warehouse", "source": "pack_m", "target": "warehouse" },
+    { "id": "e-warehouse-inspect", "source": "warehouse", "target": "inspect" }
+  ]
+}

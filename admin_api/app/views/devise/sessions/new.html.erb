@@ -1,0 +1,136 @@
+<link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/assets/css/app.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+<link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+
+<% title_tag(@page_title || t('login')) %>
+<body class="auth-fluid-pages pb-0">
+        <div class="account-pages mt-5 mb-5">
+            <div class="container"> 
+
+                <div class="row justify-content-center">
+
+                    <div class="text-center mb-2">
+                        <a href="."><img src="<%= Setting.login_logo  %>" height="180" alt=""></a>
+                    </div>
+                    <div class="col-md-8 col-lg-6 col-xl-4">
+                        <div class="card">
+
+                            <div class="card-body p-4">
+                                
+                                <div class="text-center w-75 m-auto">
+                                    <h4 class="mb-4 mt-3"> 登录 </h4>
+                                </div>
+
+                                <form id="new_user1" action="/mpi/login" accept-charset="UTF-8" method="post">
+
+                                    <input  type="hidden" name="back" value="/mpi/index">
+                                    <%= form_token %>
+
+                                    <div class="mb-2">
+                                        <label for="emailaddress" class="form-label">登录名</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" id="emailaddress" name="user[email]" required="" placeholder="请输入用户名或邮箱">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <label for="password" class="form-label">密码</label>
+                                        <div class="input-group input-group-merge">
+                                            <input type="password" id="password"  id="password"  name="user[password]" class="form-control" placeholder="请输入密码">
+                                            
+                                            <div class="input-group-text show-password">
+                                                <span class="password-eye"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="checkbox-signin" checked>
+                                            <label class="form-check-label" for="checkbox-signin">
+                                                记住我
+                                            </label>
+                                            <a  href="/password/new" target="_blank" class="text-muted float-end"><small>忘记密码?</small></a>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="d-grid mb-0 text-center">
+                                        <button class="btn btn-primary" type="submit"> 登录系统 </button>
+                                    </div>
+
+                                </form>
+
+                                <div class="text-center">
+                                    <h6 class="mt-4 text-muted">或通过以下方式登录</h6>
+                                    <ul class="social-list list-inline mt-3 mb-0">
+                                        <li class="list-inline-item">
+                                            <a href="/wework/login" class="social-list-item border-info text-info"><i class="mdi mdi-wechat"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div> <!-- end card-body -->
+                        </div>
+                        <!-- end card -->
+
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <%= Date.today.year %> &copy; Cheenwe with <a href="https://github.com/cheenwe" target="_blank" class="link-secondary" rel="noopener">Source code</a>
+            </div>
+            <div class="col-md-6">
+                <div class="text-md-end footer-links d-none d-sm-block">
+                    <a href="javascript:void(0);">About Us</a>
+                    <a href="javascript:void(0);">Help</a>
+                    <a href="javascript:void(0);" class="link-secondary" rel="noopener"><%= Setting.app_version %></a>
+                    <a target="_blank" class="link-secondary" href="http://beian.miit.gov.cn/">
+                        <img style="width: 20px;margin-top: -4px;" src="https://img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png"><%=Setting.icp_beianhao%>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end auth-fluid-->
+
+<style>
+    html[data-sidebar-size=condensed] .logo span.logo-lg {
+        display: block;
+    }
+    html[data-sidebar-size=condensed]:not([data-sidebar-size=compact]):not(.auth-fluid-pages) {
+        min-height: 760px;
+    }
+</style>
+
+<script type="text/javascript">
+
+    var show_passwd_flag = false;
+    
+        // Password Show/Hide
+        $(".show-password").on('click', function () {
+            show_passwd_flag = !show_passwd_flag;
+            console.log( show_passwd_flag);
+            if (show_passwd_flag){
+                $(this).siblings("input").attr("type", "text");
+                // $(this).attr('data-password', true);
+                $(this).addClass("show-password");
+            } else {
+                console.log("hidden  mmmm");
+
+                $(this).siblings("input").attr("type", "password");
+                // $(this).attr('data-password', false);
+                $(this).removeClass("show-password");
+            }
+        });
+</script>

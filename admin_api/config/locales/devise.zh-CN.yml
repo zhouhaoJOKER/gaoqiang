@@ -1,0 +1,85 @@
+zh-CN:
+  errors:
+    messages:
+      expired: "您已过期，请重新申请"
+      not_found: "没有找到"
+      already_confirmed: "已经确认"
+      not_locked: "未锁定"
+      not_saved:
+        one: "1个错误导致用户注册失败:"
+        other: "%{count}个错误导致失败:"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              blank: "不能为空"
+              taken: "已存在"
+              too_short: "必须大于%{count}位"
+              too_long: "必须小于%{count}位"
+              invalid: "只允许数字、大小写字母和下划线"
+            email:
+              blank: "不能为空"
+              taken: "已存在"
+            password:
+              confirmation: "输入不一致"
+              blank: "不能为空"
+              too_short: "必须大于%{count}位"
+    attributes:
+      user:
+        login: "用户名或邮箱"
+        email: "邮箱"
+        username: "用户名"
+        password: "密码"
+
+        org: "所在公司"
+        job: "职务"
+        phonecall: "手机号码"
+        workcall: "工作电话"
+        homecall: "家庭电话"
+        workadress: "工作地址"
+        homeadress: "家庭地址"
+
+        password_confirmation: "再次输入密码"
+        remember_me: "记住我"
+  devise:
+    failure:
+      not_found_in_database: '用户名不存在'
+      already_authenticated: '你已经登录。'
+      unauthenticated: '继续操作前请注册或者登录.'
+      unconfirmed: '请先去邮箱激活您的帐号'
+      locked: '您的帐号已被锁定.'
+      invalid: '邮箱或密码错误'
+      invalid_token: '认证码无效.'
+      timeout: '您已登录超时，请重新登录.'
+      inactive: '您还没有激活帐户.'
+      not_approved: '您的账号未开通，无法登陆系统, 请联系管理员开通!'
+    sessions:
+      signed_in: '登录成功.'
+      signed_out: '退出成功.'
+
+    passwords:
+      send_instructions: '几分后，您将收到重置密码的电子邮件.'
+      updated: '您的密码已修改成功，请重新登录.'
+      forgot_password: '忘记密码'
+    confirmations:
+      send_instructions: '几分后，您将收到帐号激活的电子邮件.'
+      confirmed: '注册成功.'
+    registrations:
+      signed_up: '您的帐号已注册成功，如无意外，您将地收到一封确认邮件.'
+      updated: '帐号资料更新成功.'
+      destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您.'
+      inactive_signed_up: '虽然您已经注册成功,但因为%{reason},所以您依然无法登录.'
+      signed_up_but_unconfirmed: '请先登入邮箱激活账号(注意检查“垃圾邮件”)'
+      signed_up_but_not_approved: '您的账号未开通，无法登陆系统'
+    unlocks:
+      send_instructions: '几分后，您将收到一封帐号解锁的邮件.'
+      unlocked: '您的帐号已成功解锁，请登录.'
+    mailer:
+      confirmation_instructions:
+        subject: '确认信息'
+      reset_password_instructions:
+        subject: '重置密码信息'
+      unlock_instructions:
+        subject: '解锁信息'

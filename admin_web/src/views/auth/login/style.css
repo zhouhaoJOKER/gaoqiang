@@ -1,0 +1,146 @@
+@reference '@styles/core/tailwind.css';
+
+/* 右侧整栏：柔和主色光晕 + 与左侧插画区形成层次 */
+.auth-right-shell {
+  @apply overflow-hidden;
+
+  background-color: var(--el-bg-color-page);
+  background-image:
+    radial-gradient(
+      900px circle at 92% -8%,
+      color-mix(in srgb, var(--el-color-primary) 14%, transparent) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      700px circle at -5% 105%,
+      color-mix(in srgb, var(--el-color-primary) 8%, transparent) 0%,
+      transparent 48%
+    );
+}
+
+html.dark .auth-right-shell {
+  background-image:
+    radial-gradient(
+      900px circle at 92% -8%,
+      color-mix(in srgb, var(--el-color-primary) 22%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      700px circle at -5% 105%,
+      color-mix(in srgb, var(--el-color-primary) 12%, transparent) 0%,
+      transparent 50%
+    );
+}
+
+/* 授权页右侧区域：居中卡片，不再使用固定 440×650 盒子 */
+.auth-right-wrap {
+  @apply absolute inset-0 flex flex-col items-center justify-center gap-6 px-6 pb-28 pt-14
+    max-sm:px-7
+    animate-[slideInRight_0.6s_cubic-bezier(0.25,0.46,0.45,0.94)_forwards]
+    max-md:animate-none;
+
+  .form {
+    @apply w-full max-w-[420px];
+  }
+
+  .login-form-surface {
+    @apply rounded-2xl border px-8 pb-10 pt-9 shadow-[0_22px_60px_-18px_rgba(15,23,42,0.12)]
+      backdrop-blur-md max-sm:px-6 max-sm:pb-8 max-sm:pt-7;
+
+    background-color: color-mix(in srgb, var(--el-bg-color) 82%, transparent);
+    border-color: color-mix(in srgb, var(--el-border-color) 65%, transparent);
+  }
+
+  .login-form-fields {
+    @apply mt-6;
+  }
+
+  .title {
+    @apply text-g-900 text-3xl font-bold tracking-tight max-md:text-[1.65rem] max-sm:pt-0;
+
+    padding-left: 0.85rem;
+    line-height: 1.25;
+    border-left: 4px solid var(--el-color-primary);
+    border-radius: 2px;
+  }
+
+  .sub-title {
+    @apply mt-3 text-g-600 text-[13px] leading-relaxed;
+  }
+
+  .custom-height {
+    @apply !h-[40px];
+  }
+}
+
+.login-preorder-hint {
+  @apply flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-base font-medium
+    text-g-600 max-sm:text-[15px];
+}
+
+.login-preorder-link {
+  @apply text-theme text-lg font-semibold no-underline transition-opacity hover:opacity-85 max-sm:text-base;
+}
+
+.login-preorder-sep {
+  @apply mx-1 text-g-400 text-lg font-normal max-sm:text-base;
+}
+
+.login-preorder-note {
+  @apply text-g-700 text-lg max-sm:text-base;
+}
+
+html.dark .auth-right-wrap .login-form-surface {
+  background-color: color-mix(in srgb, var(--el-bg-color) 75%, transparent);
+  border-color: color-mix(in srgb, var(--el-border-color) 40%, transparent);
+  box-shadow: 0 24px 70px -20px rgb(0 0 0 / 55%);
+}
+
+/* 滑入动画 */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--art-text-gray-800);
+
+  a {
+    color: var(--main-color);
+    text-decoration: none;
+  }
+}
+
+.login-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 8px;
+  font-size: 12px;
+  color: var(--art-text-gray-600);
+  text-align: center;
+}
+
+/* 公安备案图标 */
+.gab::before {
+  display: inline-block;
+  height: 16px;
+  padding-left: 16px;
+  margin-top: -2px;
+  line-height: 16px;
+  vertical-align: middle;
+  content: '';
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpDNzc4MTU4QjRDMjI2ODExODA4M0E1MjgyODY2QjJGNSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo3MEQ4Mzk3RUNFRkIxMUU1ODUwRUQzRjg1OUM4MDkxNCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo3MEQ4Mzk3RENFRkIxMUU1ODUwRUQzRjg1OUM4MDkxNCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkI3RjExNzQwNzIwNjgxMTgyMkFGNzI0QjhFQkQ0RDIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Qzc3ODE1OEI0QzIyNjgxMTgwODNBNTI4Mjg2NkIyRjUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4RiM0TAAADP0lEQVR42hSS22tbdQDHP+eXc05uPSdps2Zpmm69rOlaWkvXCh1YLJsOLAy1DOZQNnyZCkN8EgSffFAHvnhjtriBD1OZ1gdRJogXip1r7WqLW9Ji6ZXem+bkfjknifUP+PD98OUjVbKzlCs+sOpBX0WQVtKLe8/dvzf54s620dzR3vh990D7t8LbN0tSgJkF4UT6HyyVdWzuJrJrd1+/ef3Wm0p+rd6ZM6gIHf+TLTyctdPX1fDHmVevDRcS7JWt9cMB2YFw1QKR3pvXv/hwIrJff9pMcmY5znnlgMdnlujo9vD5nb+eMGbGPrZ7KmScm8jFfA5V/vvSu2+Mfjm1JjEymCI7ukvcppI+NEvce8DZ13JkLz/LC1cnLo5+kq3WairnhVxIYzwau/j2j8c56lPxza2S3S2iHjpYs3G0Bj+RGxEGK//ye6qR90aXz1UplaDYmB5/Kb26+XRjs496VxKzaEdYFtYpnaq32nE2ezApo0lpOtsEptBQAvqYHFuJDjeHTJcqK8yn/TguHWNn2cTb5EYKVyNZCqFeL3tBP9GJDFfeCcDC5CmhqlqfLnIMdBf46usqJqdMmp4KwXSC1O0VMo9iBEIKn36QIVvxM9iyQ3x+OyVsSkbP7ecZ7jVArWPpo0WOz0bRgxaeQJHwCRX5xhQ//LxC61A1nUfiHGTtyG7NH40drPY/M2hy9oKdK7cH+W18Hp8MtW4Fs8bF3NYAEekk3w2tI7ntOAPVyGW53J02nKQm5/jsZYn3fT2MT7bRWWtS37DGrV8DRDxerl128Hz4Aav3U9iq3ZqU2vhmJDZz52p6KYmWj3Fs6ATlsp1yPotsJUgQRNTUUH64wP5yDFs4iN7aHBNVwQuveFrPjehhiYziYvHPfXKWwDgosVvwY/fYYHeDRLKE+lgHQju65fIPnJat1BSVfL7L4Q2h9kuUjAzp/QTC40GRBXv/bGLlyrjaQghVPmzcqivm99qEhCE7QvYFm9eFLPLodXZsWJAyKGxuIx+epLVoyGoORXOid4ZnbHogLlUqSxxsR1m5O3aytL47LDkS/Z7AkUZFKnkUp81exL3l8NUa+YJz2sglf/L39PxSW9fFfwIMAGXrVaZ2QfN+AAAAAElFTkSuQmCC')
+    no-repeat;
+  background-position: center;
+}

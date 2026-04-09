@@ -1,0 +1,38 @@
+
+<div class="flex-fill d-flex flex-column justify-content-center py-4">
+  <div class="container-tight py-6">
+    <div class="text-center mb-4">
+      <a href="."><img src="<%= Setting.logo  %>" height="48" alt=""></a>
+    </div>
+    <form class="card card-md"  id="edit_user" action="/confirmation" accept-charset="UTF-8"  method="post">
+      <%= form_token %>
+      <div class="card-body  p-6">
+
+        <h2 class="card-title text-center mb-4">Resend confirmation instructions</h2>
+        <p class="text-muted">resend confirmation instructions/未收到激活邮件，重新发送邮件.</p>
+
+        <%= notices_message %>
+        
+        <div class="mb-3">
+          <label class="form-label">Email address</label>
+          <input  class="form-control"  data-parsley-type="email" autofocus="autofocus" autocomplete="off" type="email" name="user[email]" id="user_email"  aria-describedby="emailHelp"   placeholder="Enter email" required/>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="btn btn-primary w-100">Resend confirmation instructions/重发激活邮件</button>
+        </div>
+      </div>
+    </form>
+
+
+    <div class="text-center text-muted mt">
+      Don't have account yet? 
+      <a href="<%= new_registration_path(resource_name) %>" id="register-btn" class="uppercase">Create an account</a> Or <a href="/login">Sign in</a>
+    </div>
+  </div>
+</div>
+
+<%= render "layouts/footer"%>
+
+
+ 

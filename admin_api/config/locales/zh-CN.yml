@@ -1,0 +1,147 @@
+zh-CN:
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: 必须是可被接受的
+      blank: 不能为空
+      confirmation: 与确认值不匹配
+      empty: 不能留空
+      equal_to: 必须等于 %{count}
+      even: 必须为双数
+      exclusion: 是保留关键字
+      greater_than: 必须大于 %{count}
+      greater_than_or_equal_to: 必须大于或等于 %{count}
+      inclusion: 超出范围
+      invalid: 是无效的
+      less_than: 必须小于 %{count}
+      less_than_or_equal_to: 必须小于或等于 %{count}
+      not_a_number: 不是数字
+      not_an_integer: 必须是整数
+      odd: 必须为单数
+      record_invalid: ! '验证失败: %{errors}'
+      taken: 已经被使用
+      too_long: 过长（最长为 %{count} 个字符）
+      too_short: 过短（最短为 %{count} 个字符）
+      wrong_length: 长度非法（必须为 %{count} 个字符）
+    template:
+      body: 如下字段出现错误：
+      header:
+        one: 有 1 个错误发生导致「%{model}」无法被保存。
+        other: 有 %{count} 个错误发生导致「%{model}」无法被保存。
+
+  will_paginate:
+    previous_label: "上一页" #&#8592;
+    next_label: "下一页" # &#8594;
+    page_gap: "&hellip;"
+    container_aria_label: "Pagination"
+    page_aria_label: "%{page}页"
+
+    page_entries_info:
+      single_page:
+        zero:  "无数据"
+        one:   "显示 1 %{model}"
+        other: "全部,共: %{count} 条"
+      single_page_html:
+        zero:  "无数据"
+        one:   "显示 <b>1</b> "
+        other: "全部,共: %{count} 条"
+
+      multi_page: "共:%{count}条&nbsp&nbsp 第 <b>%{from}&nbsp;-&nbsp;%{to}</b>条"
+      multi_page_html: "共:%{count}条&nbsp&nbsp 第 <b>%{from}&nbsp;-&nbsp;%{to}</b>条"
+
+  btn:
+    back: 返回
+    doing: 处理中...
+    submit: 提交
+    submiting: 提交中...
+    upload: 上传
+    previous: 上一步
+    next: 下一步
+    finish: 完成
+    reset: 重置
+    clear: 清空
+    confirm: 确认
+    cancel: 取消
+    delete: 删除
+    close: 关闭
+
+
+
+  id: ID
+  gteq: 大于
+  lteq: 小于
+  dashboard: 首页
+  detail: 详情
+  history: 历史
+  access_log: 日志
+  attachment: 附件
+  back: 返回
+  clone: 克隆
+  edit: 编辑
+  new: 新建
+  create: 创建
+  update: 更新
+  doing:  处理中...
+  upload: 上传
+  download: 下载
+  bulk: 批量
+  modal: 弹框
+  refresh: 刷新
+  forward: 前进
+  create_success: 创建成功
+  update_success: 更新成功
+  destroy_success: 删除成功
+  search: 搜索
+  read: 查看
+  delete: 删除
+  destroy: 删除
+  delete_confirm: 确认删除?
+  property: 配置属性
+  bulk_create: 批量添加
+  code: 编号
+  name: 名称
+  bulk_edit: 批量编辑
+  bulk_delete: 批量删除
+  bulk_import: 批量导入
+  bulk_export: 批量导出
+  import: 导入
+  export: 导出
+  data: 数据
+  preview: 预览
+  import_total: 合计导入
+  import_success: 成功导入
+
+  bulk_delete_confirm: 确认删除选中记录
+  list: 列表
+  bulk_action: "批量%{action}, 处理%{size}条数据."
+  bulk_action_success: "批量%{action}成功, 处理%{size}条数据."
+  bulk_export_success: "批量导出成功，请留意系统通知"
+  download_success: "下载成功!"
+  select_data_then_bulk: "请先选择数据,再进行批量操作!"
+  success: 成功
+  fail: 失败
+  tools: 工具
+  reset: 重置
+  again: 再次
+  template: 模板
+  file: 文件
+  upload_import_file: 上传导入文件
+  preview_and_edit_data: 预览并修改数据
+  import_data_success: 导入数据成功
+  result: 结果
+  check: 查看
+  
+
+  privacy: 使用协议
+  contact: 联系我
+  english: English
+  chinese: 中文
+  settings: 配置
+  document: 图档
+  gallery: 画廊
+  wallpaper: 壁纸
+  files: 文件共享
+
+  name_or_code: 名称或编号
+  created_at_gteq: 创建大于
+  created_at_lteq: 创建小于

@@ -1,0 +1,43 @@
+
+
+<div class="flex-fill d-flex flex-column justify-content-center py-4">
+  <div class="container-tight py-6">
+    <div class="text-center mb-4">
+      <a href="."><img src="<%= Setting.logo  %>" height="48" alt=""></a>
+    </div>
+    <form class="card card-md" id="new_user1" action="/password" accept-charset="UTF-8"  method="post">
+      <%= form_token %>
+      <input type="hidden" name="_method" value="put">
+
+      <input type="hidden" value="<%= params[:reset_password_token] %>" name="user[reset_password_token]" id="user_reset_password_token">
+      <div class="card-body  p-6">
+
+        <h2 class="card-title text-center mb-4">Change your password</h2>
+        <p class="text-muted">修改您的密码.</p>
+
+        <%= notices_message %>
+        <div class="mb-3">
+          <label class="form-label">New password</label>
+          <input  class="form-control" autofocus="autofocus" autocomplete="new-password" type="password" name="user[password]" id="user_password"   aria-describedby="emailHelp"  data-parsley-trigger="change"  minlength="6"   placeholder="Enter password"required/>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Confirm new password</label>
+          <input class="form-control"  autocomplete="new-password" type="password" name="user[password_confirmation]" id="user_password_confirmation"   data-parsley-trigger="change"  minlength="6"  placeholder="Enter Confirm password"required/>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="btn btn-primary w-100" data-disable-with="Change my password"> Change my password</button>
+        </div>
+      </div>
+    </form>
+
+
+    <div class="text-center text-muted mt">
+      Don't have account yet? 
+      <a href="<%= new_registration_path(resource_name) %>" id="register-btn" class="uppercase">Create an account</a> Or <a href="/login">Sign in</a>
+    </div>
+  </div>
+</div>
+
+<%= render "layouts/footer"%>

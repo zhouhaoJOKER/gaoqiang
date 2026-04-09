@@ -1,0 +1,24 @@
+<br>
+
+<tr>
+    <td style="padding: 0px 20px;">
+        <p>Hello/ 您好 <%= @email %>!</p>
+    </td>
+</tr>
+<tr>
+    <td valign="middle" style="line-height:24px;padding: 15px 20px;">
+
+        <% if @resource.try(:unconfirmed_email?) %>
+          <p>
+            我们正在联系您以通知您的电子邮件正在被更改为: <span class="text-info"><%= @resource.unconfirmed_email %></span>.<br>
+            We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.
+          </p>
+        <% else %>
+          <p>我们正在联系您以通知您的电子邮件已成功更改为: <span class="text-info"><%= @resource.email %></span>. <br>
+            We're contacting you to notify you that your email has been changed to <%= @resource.email %>.
+          </p>
+        <% end %>
+    </td>
+</tr>
+
+<br>
