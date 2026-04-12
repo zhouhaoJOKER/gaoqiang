@@ -21,6 +21,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 --
 -- Table structure for table `active_storage_attachments`
 --
+SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS `active_storage_attachments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -4717,3 +4718,4 @@ SET FOREIGN_KEY_CHECKS = 1;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2026-04-07 12:54:39
+SET FOREIGN_KEY_CHECKS = 1;
