@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__mssql-dev__get-tables",
+      "mcp__mssql-dev__query",
+      "mcp__mysql-dev__list_databases",
+      "mcp__mysql-dev__list_tables"
+    ]
+  }
+}
