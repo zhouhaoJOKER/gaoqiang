@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bin/rails server *)",
+      "Bash(bundle list *)",
+      "Bash(ruby -v)",
+      "Bash(bundle exec *)",
+      "Bash(code --list-extensions)",
+      "Bash(rails server *)",
+      "Bash(ruby bin/rails server -p 3000)",
+      "Bash(taskkill /F /PID 11916)",
+      "Bash(rdbg -c -- rails server -p 3000)",
+      "Bash(rdbg -n -c rails server -p 3000)",
+      "Bash(pkill -f \"rails server\")",
+      "Bash(ruby -r debug/prelude -e \"debugger; puts 'test'\")",
+      "Bash(rails s *)",
+      "Bash(awk '{print $2}')",
+      "Bash(xargs -r kill)",
+      "Bash(rdbg --version)"
+    ]
+  }
+}
