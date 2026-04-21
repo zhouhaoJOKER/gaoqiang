@@ -57,7 +57,8 @@
       "Bash(bin/rails runner:*)",
       "mcp__chrome-devtools__wait_for",
       "Bash(code:*)",
-      "WebFetch(domain:)"
+      "WebFetch(domain:)",
+      "Bash(dir *)"
     ]
   }
 }
