@@ -1,6 +1,6 @@
 {
   "info": {
-    "name": "高强 Rails API - 外跟单调试",
+    "name": "高强 Rails API - 外跟单自动化验证",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -10,14 +10,26 @@
     },
     {
       "key": "username",
-      "value": "admin"
+      "value": "user1"
     },
     {
       "key": "password",
-      "value": "Admin"
+      "value": "123123123"
     },
     {
       "key": "token",
+      "value": ""
+    },
+    {
+      "key": "wgd_order_id",
+      "value": ""
+    },
+    {
+      "key": "wgd_order_line_id",
+      "value": ""
+    },
+    {
+      "key": "test_code",
       "value": ""
     }
   ],
@@ -77,14 +89,15 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('登录成功', function () {",
+              "pm.test('登录 HTTP 200', function () {",
               "  pm.response.to.have.status(200);",
               "});",
               "",
               "const json = pm.response.json();",
               "const token = json.token || json.refreshToken || (json.data && (json.data.token || json.data.refreshToken));",
               "",
-              "pm.test('返回 token', function () {",
+              "pm.test('登录成功并返回 token', function () {",
+              "  pm.expect(json.code).to.eql(200);",
               "  pm.expect(token).to.be.ok;",
               "});",
               "",
@@ -97,7 +110,107 @@
       ]
     },
     {
-      "name": "02 查询外跟单订单列表",
+      "name": "02 创建外跟单订单（含明细）",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/wgd/orders",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "wgd",
+            "orders"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const code = 'WGD-POSTMAN-' + Date.now();",
+              "pm.collectionVariables.set('test_code', code);",
+              "",
+              "pm.request.body.update(JSON.stringify({",
+              "  code: code,",
+              "  client_name: 'Postman测试客户',",
+              "  contract_code: 'HT-POSTMAN-001',",
+              "  receive_date: '2026-05-10',",
+              "  hazard_pack_month: '已办26.05',",
+              "  customer_delivery_date_text: '测试交期',",
+              "  follower_name: 'Postman',",
+              "  invoice_status: '未开票',",
+              "  remark: 'Postman自动化创建',",
+              "  line_items: [",
+              "    {",
+              "      product_name: '1L 阻隔瓶',",
+              "      model: '1L-TEST',",
+              "      foil_pad_status: '有结存',",
+              "      color: '白',",
+              "      requirements: '白瓶白盖，自动化测试',",
+              "      weight: '120G',",
+              "      color_master_status: '有结存',",
+              "      product_image_text: '测试图文',",
+              "      qty: 1000,",
+              "      unit: '只',",
+              "      unit_price: 1.23,",
+              "      line_amount: 1230,",
+              "      delivered_qty: 0,",
+              "      undelivered_qty: 1000,",
+              "      sort: 1,",
+              "      remark: '首条测试明细'",
+              "    }",
+              "  ]",
+              "}));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('创建订单 HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const json = pm.response.json();",
+              "",
+              "pm.test('创建订单成功', function () {",
+              "  pm.expect(json.code).to.eql(200);",
+              "  pm.expect(json.data.id).to.be.ok;",
+              "});",
+              "",
+              "pm.collectionVariables.set('wgd_order_id', json.data.id);",
+              "",
+              "if (json.data.line_items && json.data.line_items.length > 0) {",
+              "  pm.collectionVariables.set('wgd_order_line_id', json.data.line_items[0].id);",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 查询外跟单订单列表",
       "request": {
         "method": "GET",
         "header": [
@@ -135,14 +248,335 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test('查询成功', function () {",
+              "pm.test('查询订单列表成功', function () {",
               "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.code).to.eql(200);",
+              "  pm.expect(json.data).to.be.an('array');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 查询外跟单订单详情",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/wgd/orders/{{wgd_order_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "wgd",
+            "orders",
+            "{{wgd_order_id}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('查询订单详情成功', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.code).to.eql(200);",
+              "  pm.expect(json.data.id).to.eql(Number(pm.collectionVariables.get('wgd_order_id')));",
+              "  pm.expect(json.data.line_items).to.be.an('array');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 新增外跟单明细",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"order_id\": \"{{wgd_order_id}}\",\n  \"product_name\": \"测试盖子\",\n  \"model\": \"CAP-TEST\",\n  \"foil_pad_status\": \"有结存\",\n  \"color\": \"白\",\n  \"requirements\": \"自动化新增明细\",\n  \"weight\": \"10G\",\n  \"color_master_status\": \"有结存\",\n  \"qty\": 1000,\n  \"unit\": \"只\",\n  \"unit_price\": 0.12,\n  \"line_amount\": 120,\n  \"delivered_qty\": 0,\n  \"undelivered_qty\": 1000,\n  \"sort\": 2,\n  \"remark\": \"Postman新增明细\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/wgd/order_lines",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "wgd",
+            "order_lines"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('新增明细成功', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.code).to.eql(200);",
+              "  pm.expect(json.data.id).to.be.ok;",
+              "  pm.collectionVariables.set('wgd_order_line_id', json.data.id);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 查询外跟单明细列表",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/wgd/order_lines?page=1&size=20",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "wgd",
+            "order_lines"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "size",
+              "value": "20"
+            }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('查询明细列表成功', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.code).to.eql(200);",
+              "  pm.expect(json.data).to.be.an('array');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 查询外跟单明细详情",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/wgd/order_lines/{{wgd_order_line_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "wgd",
+            "order_lines",
+            "{{wgd_order_line_id}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('查询明细详情成功', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.code).to.eql(200);",
+              "  pm.expect(json.data.id).to.eql(Number(pm.collectionVariables.get('wgd_order_line_id')));",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 更新外跟单订单",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"invoice_status\": \"已开电子发票\",\n  \"remark\": \"Postman自动化更新\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/wgd/orders/{{wgd_order_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "wgd",
+            "orders",
+            "{{wgd_order_id}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('更新订单成功', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.code).to.eql(200);",
+              "  pm.expect(json.data.invoice_status).to.eql('已开电子发票');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "09 更新外跟单明细",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"delivered_qty\": 100,\n  \"undelivered_qty\": 900,\n  \"remark\": \"Postman自动化更新明细\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/wgd/order_lines/{{wgd_order_line_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "wgd",
+            "order_lines",
+            "{{wgd_order_line_id}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('更新明细成功', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.code).to.eql(200);",
+              "  pm.expect(Number(json.data.delivered_qty)).to.eql(100);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10 删除测试外跟单订单",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/wgd/orders/{{wgd_order_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "wgd",
+            "orders",
+            "{{wgd_order_id}}"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('删除订单成功', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.code).to.eql(200);",
               "});",
               "",
-              "const json = pm.response.json();",
-              "pm.test('接口返回 code=200', function () {",
-              "  pm.expect(json.code).to.eql(200);",
-              "});"
+              "pm.collectionVariables.set('wgd_order_id', '');",
+              "pm.collectionVariables.set('wgd_order_line_id', '');"
             ]
           }
         }
