@@ -163,6 +163,7 @@ Rails.application.routes.draw do
       draw :inv
       draw :pm
       draw :qa
+      draw :wgd
 
       #活动 activities
       match "activities"  => "activities#index", via: :get
